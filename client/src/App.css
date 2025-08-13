@@ -1,0 +1,149 @@
+/* Main container for the app */
+.app {
+  width: 85vw; /* 85% of the screen width */
+  padding: 40px;
+  margin: 150px auto; /* Center the app on the page */
+  display: flex; /* Put items side by side */
+  flex-direction: row;
+  justify-content: space-between; /* Keep space between left and right boxes */
+  flex-wrap: wrap; /* Move to next line if screen is small */
+}
+
+/* Big heading style */
+.heading {
+  font-size: 25px;
+  font-weight: 700;
+  color: #d81b60; /* Dark pink text */
+  letter-spacing: 0.2px;
+  margin-bottom: 10px;
+}
+
+/* ==================== FORM CONTAINER ==================== */
+
+/* White box that contains the form */
+.form-container {
+  background-color: white;
+  border-radius: 16px; /* Rounded corners */
+  width: 450px;
+  height: 320px;
+  padding: 30px;
+}
+
+/* Style for text boxes inside the form */
+form > input {
+  width: 100%;
+  padding: 10px;
+  border: 1.5px solid #ececec; /* Light border */
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fafbfc; /* Off-white background */
+  color: #333;
+  margin-bottom: 18px;
+}
+
+/* Style for form buttons */
+form > button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #ff3576; /* Pink button */
+  color: #fff; /* White text */
+  margin-bottom: 18px;
+}
+
+/* ==================== STUDENTS TABLE ==================== */
+
+/* White box that contains the student list */
+#students-container {
+  background-color: white;
+  width: 600px;
+  height: 320px;
+  border-radius: 16px;
+  padding: 30px;
+}
+
+/* Scrollable area for student list */
+#students-container div {
+  overflow: scroll; /* Adds scroll if content is long */
+  height: 85%;
+}
+
+/* Table general style */
+table {
+  width: 100%;
+  text-align: center; /* Center text in cells */
+  color: #555; /* Dark gray text */
+}
+
+/* Table header style */
+th {
+  padding: 10px;
+  background-color: #ff4f81; /* Darker pink */
+  color: white;
+}
+
+/* Table data cells */
+td {
+  padding: 10px;
+  background-color: #fff0f5; /* Very light pink */
+}
+
+/* Buttons inside table */
+table button {
+  background: #ff3576; /* Pink button */
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  margin-right: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+/* Special style for edit button */
+table #edit-btn {
+  background: #ffb3d1; /* Light pink */
+  color: #ff3576; /* Dark pink text */
+}
+
+/* ==================== RESPONSIVE STYLES ==================== */
+
+/* Medium screens */
+@media screen and (max-width: 1350px) {
+  .app {
+    margin: 80px auto;
+    width: 100%;
+  }
+  .form-container {
+    width: 40%;
+    margin-bottom: 50px;
+  }
+
+  #students-container {
+    width: 50%;
+  }
+}
+
+/* Small screens (mobile) */
+@media screen and (max-width: 900px) {
+  .app {
+    width: 100vw;
+    margin-top: 30px;
+  }
+  .form-container {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  #students-container {
+    width: 100%;
+  }
+  table button {
+    padding: 6px;
+    margin-top: 5px;
+  }
+}
