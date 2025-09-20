@@ -2,63 +2,63 @@ name: Deploy to EC2
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        cache: 'npm'
-        cache-dependency-path: |
-          client/package-lock.json
-          server/package-lock.json
-    
-    - name: Install client dependencies
-      run: |
-        cd client
-        npm ci
-    
-    - name: Build React app
-      run: |
-        cd client
-        npm run build
-    
-    - name: Deploy to EC2
-      uses: appleboy/ssh-action@v0.1.7
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USERNAME }}
-        key: ${{ secrets.EC2_PRIVATE_KEY }}
-        script: |
-          cd /home/ec2-user/student_crud_mern
-          git pull origin main
-          
-          # Update server dependencies and restart
-          cd server
-          npm install
-          pm2 restart student-crud-server || pm2 start npm --name "student-crud-server" -- start
-          
-          # Update client build
-          cd ../client
-          npm install
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: |
+            client/package-lock.json
+            server/package-lock.json
+
+      - name: Install client dependencies
+        run: |
+          cd client
+          npm ci
+
+      - name: Build React app
+        run: |
+          cd client
           npm run build
-          
-          # Copy to web directory
-          sudo rm -rf /var/www/student-crud/*
-          sudo cp -r dist/* /var/www/student-crud/
-          sudo chown -R nginx:nginx /var/www/student-crud
-          sudo chmod -R 755 /var/www/student-crud
-          
-          # Restart nginx
-          sudo systemctl reload nginx
-          
-          echo "Deployment completed successfully!"
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          script: |
+            cd /home/ec2-user/student_crud_mern
+            git pull origin main
+
+            # Update server dependencies and restart
+            cd server
+            npm install
+            pm2 restart student-crud-server || pm2 start npm --name "student-crud-server" -- start
+
+            # Update client build
+            cd ../client
+            npm install
+            npm run build
+
+            # Copy to web directory
+            sudo rm -rf /var/www/student-crud/*
+            sudo cp -r dist/* /var/www/student-crud/
+            sudo chown -R nginx:nginx /var/www/student-crud
+            sudo chmod -R 755 /var/www/student-crud
+
+            # Restart nginx
+            sudo systemctl reload nginx
+
+            echo "Deployment completed successfully!"
