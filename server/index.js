@@ -13,7 +13,7 @@ import studentsRoute from "./routes/studentsRoute.js";
 // App setup
 const app = express();
 const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || "localhost";
+const HOST = process.env.HOST || "0.0.0.0";
 
 const DATABASE_URL = process.env.DATABASE_URL;
 

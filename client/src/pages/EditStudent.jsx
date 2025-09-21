@@ -39,7 +39,7 @@ function EditStudent() {
 
     // 3. Send PUT request to backend
     try {
-      await fetch(`http://localhost:3000/update/${id}`, {
+      await fetch(`api/update/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, age }), // Send updated data

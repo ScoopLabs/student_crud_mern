@@ -57,7 +57,7 @@ function CreateStudent() {
 
     //  STEP 6: Send the data to the backend using POST request
     try {
-      const response = await fetch("http://localhost:3000/create", {
+      const response = await fetch("/api/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, age }), // send name & age as JSON

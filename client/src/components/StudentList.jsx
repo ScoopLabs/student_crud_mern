@@ -9,8 +9,8 @@ function StudentList() {
   // Function to fetch all students from backend API
   const getStudents = async () => {
     try {
-      // 1. Fetch students data from backend (localhost:3000/students)
-      const response = await fetch("http://localhost:3000/students");
+      // 1. Fetch students data from backend using relative URL
+      const response = await fetch("/api/students");
 
       // 2. Convert response into JSON
       const data = await response.json();
@@ -31,8 +31,8 @@ function StudentList() {
   // Function to delete a student by ID
   const deleteStudent = async (id) => {
     try {
-      // 1. Send DELETE request to backend for specific student
-      const response = await fetch(`http://localhost:3000/delete/${id}`, {
+      // 1. Send DELETE request to backend for specific student using relative URL
+      const response = await fetch(`/api/delete/${id}`, {
         method: "DELETE",
       });
 
